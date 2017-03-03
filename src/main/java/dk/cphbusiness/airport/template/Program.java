@@ -1,6 +1,6 @@
 package dk.cphbusiness.airport.template;
 
-import dk.cphbusiness.algorithm.examples.queues.NotPrioritisingArrayQueue;
+import dk.cphbusiness.algorithm.examples.queues.NotPrioritisingPassengerArrayQueue;
 import dk.cphbusiness.algorithm.examples.queues.PriorityQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Program {
     for (int hour = 7; hour <= 22; hour++) {
       planes.add(new Plane(new Time(hour, 0, 0)));
       }
-    queue = new NotPrioritisingArrayQueue<>(10000);
+    queue = new NotPrioritisingPassengerArrayQueue(10000);
     producer = new PassengerProducer(planes, queue);
     consumer = new PassengerConsumer(planes, queue);
     clock = new Clock(producer, consumer);
@@ -24,7 +24,7 @@ public class Program {
   
   public static void main(String[] args) {
     setup();
-    new Thread(clock).start();
+    //new Thread(clock).start();
     
     }
   
