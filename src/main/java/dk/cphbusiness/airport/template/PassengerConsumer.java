@@ -24,11 +24,11 @@ public class PassengerConsumer {
       Time now = clock.getTime();
       if (passenger.getPlane().getDepartureTime().compareTo(now) < 0) {
         passenger.setStatus(Status.MissedPlane);
-        System.out.println("Passenger "+passenger.getId()+" missed the plane");
+        System.out.println("Passenger "+passenger+" missed the plane");
         }
       else {
         passenger.setStatus(Status.Boarded);
-        System.out.println("Passenger "+passenger.getId()+" has boarded");
+        System.out.println("Passenger "+passenger+" has boarded");
         }
       }
     if (queue.isEmpty()) return;
