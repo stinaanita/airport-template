@@ -6,6 +6,9 @@ import java.util.List;
 public class PassengerConsumer {
   private final List<Plane> planes;
   private final PriorityQueue<Passenger> queue;
+  private int processingTicksLeft = 0;
+  // Passenger being processed
+  private Passenger passenger;
 
   public PassengerConsumer(List<Plane> planes, PriorityQueue<Passenger> queue) {
     this.planes = planes;
@@ -13,7 +16,35 @@ public class PassengerConsumer {
     }
   
   public void tick(Clock clock) {
-    throw new UnsupportedOperationException("No support");
+    if (processingTicksLeft > 0) {
+      processingTicksLeft--;
+      return;
+      }
+    else {
+      // Do processing here ...
+      }
+    if (queue.isEmpty()) return;
+    else {
+      passenger = queue.dequeue();
+      switch (passenger.getCategory()) {
+        case LateToFlight:
+          processingTicksLeft = 60;
+          break;
+        case BusinessClass:
+          processingTicksLeft = 60;
+          break;
+        case Disabled:
+          processingTicksLeft = 180;
+          break;
+        case Family:
+          processingTicksLeft = 180;
+          break;
+        case Monkey:
+          processingTicksLeft = 60;
+          break;
+        }
+      }
+    
     }
 
   }
