@@ -5,6 +5,7 @@ public class Passenger implements Comparable<Passenger>{
   private final Time arrivalTime;
   private final Plane plane;
   private Category category;
+  private Status status = Status.Waiting;
   
   public Passenger(int id, Time arrivalTime, Category category, Plane plane) {
     this.id = id;
@@ -21,6 +22,14 @@ public class Passenger implements Comparable<Passenger>{
   
   public Category getCategory() { return category; }
 
+  public Status getStatus() {
+    return status;
+    }
+
+  public void setStatus(Status status) {
+    this.status = status;
+    }
+  
   @Override
   public int compareTo(Passenger other) {
     if (this.category.compareTo(other.category) != 0)

@@ -21,7 +21,15 @@ public class PassengerConsumer {
       return;
       }
     else {
-      // Do processing here ...
+      Time now = clock.getTime();
+      if (passenger.getPlane().getDepartureTime().compareTo(now) < 0) {
+        passenger.setStatus(Status.MissedPlane);
+        System.out.println("Passenger "+passenger.getId()+" missed the plane");
+        }
+      else {
+        passenger.setStatus(Status.Boarded);
+        System.out.println("Passenger "+passenger.getId()+" has boarded");
+        }
       }
     if (queue.isEmpty()) return;
     else {
