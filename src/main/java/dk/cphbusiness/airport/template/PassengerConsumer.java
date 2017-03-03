@@ -12,7 +12,7 @@ public class PassengerConsumer {
     this.queue = queue;
     }
   
-  public void tick() {
+  public void tick(Clock clock) {
     throw new UnsupportedOperationException("No support");
     }
 
