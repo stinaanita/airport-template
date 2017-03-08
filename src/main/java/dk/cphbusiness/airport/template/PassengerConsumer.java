@@ -20,7 +20,8 @@ public class PassengerConsumer {
       processingTicksLeft--;
       return;
       }
-    else {
+    
+    if (passenger != null) {
       Time now = clock.getTime();
       if (passenger.getPlane().getDepartureTime().compareTo(now) < 0) {
         passenger.setStatus(Status.MissedPlane);
@@ -31,26 +32,26 @@ public class PassengerConsumer {
         System.out.println("Passenger "+passenger+" has boarded");
         }
       }
+    
     if (queue.isEmpty()) return;
-    else {
-      passenger = queue.dequeue();
-      switch (passenger.getCategory()) {
-        case LateToFlight:
-          processingTicksLeft = 60;
-          break;
-        case BusinessClass:
-          processingTicksLeft = 60;
-          break;
-        case Disabled:
-          processingTicksLeft = 180;
-          break;
-        case Family:
-          processingTicksLeft = 180;
-          break;
-        case Monkey:
-          processingTicksLeft = 60;
-          break;
-        }
+ 
+    passenger = queue.dequeue();
+    switch (passenger.getCategory()) {
+      case LateToFlight:
+        processingTicksLeft = 60;
+        break;
+      case BusinessClass:
+        processingTicksLeft = 60;
+        break;
+      case Disabled:
+        processingTicksLeft = 180;
+        break;
+      case Family:
+        processingTicksLeft = 180;
+        break;
+      case Monkey:
+        processingTicksLeft = 60;
+        break;
       }
     
     }
