@@ -3,7 +3,8 @@ package dk.cphbusiness.airport.template;
 import dk.cphbusiness.algorithm.examples.queues.PriorityQueue;
 import java.util.List;
 
-public class PassengerConsumer {
+public class PassengerConsumer 
+{
   private final List<Plane> planes;
   private final PriorityQueue<Passenger> queue;
   private int processingTicksLeft = 0;
@@ -15,28 +16,35 @@ public class PassengerConsumer {
     this.queue = queue;
     }
   
-  public void tick(Clock clock) {
-    if (processingTicksLeft > 0) {
+  public void tick(Clock clock) 
+  {
+    if (processingTicksLeft > 0) // if there are tickets left subtrackt and done.
+    {
       processingTicksLeft--;
       return;
-      }
+    }
     
-    if (passenger != null) {
+    if (passenger != null) // if there is a passanger, do this
+    {
       Time now = clock.getTime();
-      if (passenger.getPlane().getDepartureTime().compareTo(now) < 0) {
+                // getting tha planes dep. time, compare to current time if -.. missed plane
+      if (passenger.getPlane().getDepartureTime().compareTo(now) < 0) 
+      {
         passenger.setStatus(Status.MissedPlane);
-        System.out.println("Passenger "+passenger+" missed the plane");
-        }
-      else {
-        passenger.setStatus(Status.Boarded);
-        System.out.println("Passenger "+passenger+" has boarded");
-        }
+        System.out.println("Passenger " +passenger+ " missed the plane");
       }
+      else 
+      {
+        passenger.setStatus(Status.Boarded);
+        System.out.println("Passenger " +passenger+ " has boarded"); // Board plane
+      }
+    }
     
     if (queue.isEmpty()) return;
  
-    passenger = queue.dequeue();
-    switch (passenger.getCategory()) {
+    passenger = queue.dequeue();  // Next passanger
+    switch (passenger.getCategory()) // Check credentials
+    {
       case LateToFlight:
         processingTicksLeft = 60;
         break;
@@ -52,8 +60,6 @@ public class PassengerConsumer {
       case Monkey:
         processingTicksLeft = 60;
         break;
-      }
-    
+      }  
     }
-
   }

@@ -12,20 +12,22 @@ public class Program {
   private static PriorityQueue<Passenger> queue;
   private static Clock clock;
   
-  private static void setup() {
-    for (int hour = 7; hour <= 22; hour++) {
+  private static void setup() 
+  {
+    for (int hour = 7; hour <= 22; hour++) 
+    {
       planes.add(new Plane(new Time(hour, 00, 00)));
-      }
+    }
     queue = new NotPrioritisingPassengerArrayQueue(10000);
     producer = new PassengerProducer(planes, queue);
     consumer = new PassengerConsumer(planes, queue);
     clock = new Clock(producer, consumer, new Time(05, 00, 00));
-    }
+  }
   
   public static void main(String[] args) {
     setup();
     System.out.println("Hello Airport");
-    //new Thread(clock).start();
+    new Thread(clock).start();
     
     }
   

@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PassengerProducer {
+public class PassengerProducer 
+{
   private static int nextPassengerId = 1;
   private final List<Plane> planes;
   private final PriorityQueue<Passenger> queue;
@@ -13,32 +14,40 @@ public class PassengerProducer {
   private Random randomizer = new Random();
   private Time lastDeartureTime;
   
-  public PassengerProducer(List<Plane> planes, PriorityQueue<Passenger> queue) {
+  public PassengerProducer(List<Plane> planes, PriorityQueue<Passenger> queue) 
+  { // Takes in a list of planes and a priorityQueue 
     this.planes = planes;
     this.queue = queue;
     lastDeartureTime = planes.get(planes.size() - 1).getDepartureTime();
     }
   
-  public void tick(Clock clock) {
-    if (processingTicksLeft > 0) {
+  public void tick(Clock clock) 
+  {
+    if (processingTicksLeft > 0) 
+    {
       processingTicksLeft--;
       return;
-      }
+    }
+    
     Time now = clock.getTime();
-    if (now.compareTo(lastDeartureTime) >= 0) {
+    if (now.compareTo(lastDeartureTime) >= 0) 
+    {
       clock.stop();
       return;
-      }
+    }
     Plane plane = null;
-    while (plane == null) {
-      for (Plane p : planes) {
+    while (plane == null) 
+    {
+      for (Plane p : planes) 
+      {
         if (p.getDepartureTime().compareTo(now) < 0) continue;
-        if (randomizer.nextInt(3) == 0) {
+        if (randomizer.nextInt(3) == 0) 
+        {
           plane = p;
           break;
-          }
         }
       }
+    }
     
     int c = randomizer.nextInt(100);
     Category category;
@@ -54,7 +63,5 @@ public class PassengerProducer {
     queue.enqueue(passenger);
     
     processingTicksLeft = randomizer.nextInt(120);
-    }
-  
-  
+    }  
   }
